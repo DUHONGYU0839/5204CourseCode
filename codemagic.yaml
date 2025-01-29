@@ -42,7 +42,7 @@ workflows:
       - build/ios/ipa/Runner.ipa
 
 # 触发器：定义构建何时触发
-triggers:
-  - events:
+triggering:
+   events:
       - push
       - pull_request
