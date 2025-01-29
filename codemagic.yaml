@@ -1,27 +1,25 @@
- 
+
 workflows:
   flutter:
     name: Flutter Build and Distribute
-    max_build_duration: 60  # 最大构建时间（分钟）
+    max_build_duration: 60
     triggers:
       - events:
           - push
           - pull_request
-    platforms:
-      ios:
-        build:
-          flutter: true
-          xcode:
-            export_method: ad-hoc  # iOS 应用的发布方法（Ad-hoc 测试）
-      android:
-        build:
-          flutter: true
+    android:
+      flutter: true
+    ios:
+      flutter: true
     scripts:
       - name: Install Firebase CLI
         script: |
-          npm install -g firebase-tools  
+          npm install -g firebase-tools
       - name: Firebase App Distribution
         script: |
-          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk --app <YOUR_FIREBASE_APP_ID> --groups testers --token $FIREBASE_CLI_TOKEN  
+          firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
+            --app 1:594502835954:ios:79d3b7f2656fa5ee103a6b \
+            --groups testers \
+            --token 1//0gjobfWdqtGAECgYIARAAGBASNwF-L9IrDN3h1KJODIh3dd2izYCLQmg-yo_ZapAkUBaKuk4E9slOiPzIULsg0EpS12gMhLSixMg
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
