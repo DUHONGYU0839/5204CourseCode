@@ -2,11 +2,19 @@ workflows:
   flutter:
     name: Flutter Build
     max_build_duration: 60
-   instance_type: mac_mini_m2
-    triggering:
+    triggers:
       - events:
           - push
           - pull_request
+    platforms:
+      ios:
+        build:
+          flutter: true
+          xcode:
+            export_method: ad-hoc
+      android:
+        build:
+          flutter: true
     scripts:
       - name: Install Firebase CLI
         script: |
