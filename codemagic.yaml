@@ -7,15 +7,7 @@ workflows:
           - push
           - pull_request
 
-    # 定义构建过程
-    flutter:
-      # iOS 构建
-      ios:
-        build: true
-        export_method: ad-hoc
-      # Android 构建
-      android:
-        build: true
+    
 
     # 构建完之后的步骤
     scripts:
