@@ -1,50 +1,43 @@
 workflows:
-  flutter_workflow:
+  flutter:
     name: Flutter Build and Distribute
-    max_build_duration: 60 # 可根据需要设置最大构建时长
+    max_build_duration: 60
     triggers:
-      - events:
-          - push
-          - pull_request
-    # 默认使用 Flutter SDK 来构建 Flutter 项目
-    platform: flutter
-    environment:
-      flutter: stable # 使用稳定版的 Flutter SDK
-      # 如果你需要使用某些自定义的环境变量，可以在这里定义
-      # 如：FIREBASE_CLI_TOKEN: your_token
-    steps:
-      # 第一步：Checkout source code
+      - push
+      - pull_request
+    scripts:
+      # 1. Checkout source code
       - checkout: true
 
-      # 第二步：安装 Flutter 项目依赖
-      - name: Install dependencies
+      # 2. Install dependencies
+      - name: Install Flutter dependencies
         script: |
           flutter pub get
 
-      # 第三步：构建 APK (Android)
+      # 3. Build APK (Android)
       - name: Build APK (Android)
         script: |
           flutter build apk --release
 
-      # 第四步：构建 IPA (iOS)
+      # 4. Build IPA (iOS)
       - name: Build IPA (iOS)
         script: |
           flutter build ios --release
 
-      # 第五步：安装 Firebase CLI
+      # 5. Install Firebase CLI
       - name: Install Firebase CLI
         script: |
           npm install -g firebase-tools
 
-      # 第六步：上传 APK 到 Firebase App Distribution
-      - name: Firebase App Distribution (Android)
+      # 6. Upload APK to Firebase App Distribution
+      - name: Upload APK to Firebase
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app <YOUR_FIREBASE_APP_ID> \
             --groups testers \
             --token $FIREBASE_CLI_TOKEN
 
-    # 指定构建产物（用于下载和查看构建结果）
     artifacts:
+      # 7. Store build artifacts
       - build/app/outputs/flutter-apk/app-release.apk
       - build/ios/ipa/Runner.ipa
