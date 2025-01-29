@@ -9,7 +9,7 @@ workflows:
     scripts:
       - name: Build for iOS
         script: |
-          flutter build ios
+          flutter build web
           
       - name: Install Firebase CLI
         script: |
