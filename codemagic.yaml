@@ -2,11 +2,11 @@ workflows:
   flutter:
     name: Flutter Build and Distribute
     max_build_duration: 60
-    triggers:
+    triggerring:
       - events:
           - push
           - pull_request
-    steps:
+    scripts:
       - name: Checkout source code
         checkout: true
       - name: Install Flutter dependencies
