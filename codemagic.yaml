@@ -2,15 +2,7 @@ workflows:
   flutter:
     name: Flutter Build
     max_build_duration: 60
-    platforms:
-      ios:
-        build:
-          flutter: true
-          xcode:
-            export_method: ad-hoc
-      android:
-        build:
-          flutter: true
+   instance_type: mac_mini_m2
     triggering:
       - events:
           - push
