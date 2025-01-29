@@ -1,3 +1,4 @@
+
 workflows:
   flutter:
     name: Flutter Build and Distribute
@@ -6,10 +7,23 @@ workflows:
       - events:
           - push
           - pull_request
-    android:
-      flutter: true
-    ios:
-      flutter: true
+    # Flutter 构建设置
+    steps:
+      - name: Checkout source code
+        code: git clone https://github.com/your-username/your-repo.git
+      - name: Install dependencies
+        script: |
+          flutter pub get
+      - name: Build APK (Android)
+        flutter:
+          target: lib/main.dart
+          build_mode: release
+          platform: android
+      - name: Build IPA (iOS)
+        flutter:
+          target: lib/main.dart
+          build_mode: release
+          platform: ios
     scripts:
       - name: Install Firebase CLI
         script: |
@@ -22,3 +36,4 @@ workflows:
             --token 1//0gjobfWdqtGAECgYIARAAGBASNwF-L9IrDN3h1KJODIh3dd2izYCLQmg-yo_ZapAkUBaKuk4E9slOiPzIULsg0EpS12gMhLSixMg
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
+      - build/ios/ipa/Runner.ipa
