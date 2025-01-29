@@ -20,7 +20,7 @@ workflows:
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
             --app 1:594502835954:ios:79d3b7f2656fa5ee103a6b \
             --groups testers \
-            --token 1//0g3gUTQcmfN2KCgYIARAAGBASNwF-L9IrwdbcYdbDqsm4GLSaYMwgTJDyxchRHoLBnhkTAwK0u0gbydItn0r7PdTZexCkcJ7IrcI
+            --token 1//0gTtjiTqc-KlvCgYIARAAGBASNwF-L9IrbRdGuvJE5BUSUmvZ3ysogCP2coMr1H6Kf7GEzVGxGn46fnEc_M6BoWTJfZgh98f09Gg
 
     # 构建产物
     artifacts:
