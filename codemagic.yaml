@@ -26,9 +26,9 @@ workflows:
       - name: Upload APK to Firebase
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-            --app <YOUR_FIREBASE_APP_ID> \
+            --app 1:594502835954:ios:79d3b7f2656fa5ee103a6b \
             --groups testers \
-            --token $FIREBASE_CLI_TOKEN
+            --token 1//0g3gUTQcmfN2KCgYIARAAGBASNwF-L9IrwdbcYdbDqsm4GLSaYMwgTJDyxchRHoLBnhkTAwK0u0gbydItn0r7PdTZexCkcJ7IrcI
 
     # 构建产物
     artifacts:
