@@ -2,9 +2,11 @@ workflows:
   flutter:
     name: Flutter Build and Distribute
     max_build_duration: 60
+    triggers:
       - events:
           - push
           - pull_request
+    steps:
       - name: Checkout source code
         checkout: true
       - name: Install dependencies
@@ -20,9 +22,9 @@ workflows:
       - name: Firebase App Distribution
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-            --app 1:594502835954:ios:79d3b7f2656fa5ee103a6b \
+            --app <YOUR_FIREBASE_APP_ID> \
             --groups testers \
-            --token 1//0gjobfWdqtGAECgYIARAAGBASNwF-L9IrDN3h1KJODIh3dd2izYCLQmg-yo_ZapAkUBaKuk4E9slOiPzIULsg0EpS12gMhLSixMg
+            --token $FIREBASE_CLI_TOKEN
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
       - build/ios/ipa/Runner.ipa
