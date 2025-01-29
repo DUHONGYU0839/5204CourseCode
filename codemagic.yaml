@@ -6,28 +6,27 @@ workflows:
       - events:
           - push
           - pull_request
-    android:
-      flutter: true
-      build_mode: release
-    ios:
-      flutter: true
-      build_mode: release
-    scripts:
-      - name: Install Firebase CLI
+    steps:
+      - name: Checkout source code
+        checkout: true
+      - name: Install Flutter dependencies
         script: |
-          npm install -g firebase-tools
+          flutter pub get
       - name: Build APK (Android)
         script: |
           flutter build apk --release
       - name: Build IPA (iOS)
         script: |
           flutter build ios --release
+      - name: Install Firebase CLI
+        script: |
+          npm install -g firebase-tools
       - name: Firebase App Distribution
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
-            --app 1:594502835954:ios:79d3b7f2656fa5ee103a6b \
+            --app <YOUR_FIREBASE_APP_ID> \
             --groups testers \
-            --token 1//0gjobfWdqtGAECgYIARAAGBASNwF-L9IrDN3h1KJODIh3dd2izYCLQmg-yo_ZapAkUBaKuk4E9slOiPzIULsg0EpS12gMhLSixMg
+            --token $FIREBASE_CLI_TOKEN
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
       - build/ios/ipa/Runner.ipa
