@@ -7,18 +7,17 @@ workflows:
           - push
           - pull_request
 
-    # 平台配置：Android 和 iOS 构建
-    platforms:
+    # 定义构建过程
+    flutter:
+      # iOS 构建
       ios:
-        build:
-          flutter: true
-          xcode:
-            export_method: ad-hoc
+        build: true
+        export_method: ad-hoc
+      # Android 构建
       android:
-        build:
-          flutter: true
+        build: true
 
-    # Firebase CLI 配置
+    # 构建完之后的步骤
     scripts:
       - name: Install Firebase CLI
         script: |
