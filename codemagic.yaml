@@ -2,7 +2,7 @@ workflows:
   flutter_workflow:
     name: Flutter Build and Distribute
     max_build_duration: 60 # 可根据需要设置最大构建时长
-    triggers:
+    triggering:
       - events:
           - push
           - pull_request
