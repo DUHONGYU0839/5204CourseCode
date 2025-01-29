@@ -4,7 +4,7 @@ workflows:
     max_build_duration: 60
 
     # 步骤：定义构建过程中的每一个操作
-    steps:
+    stages:
       # 第一步：Checkout source code
       - checkout: true
 
