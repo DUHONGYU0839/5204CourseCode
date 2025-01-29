@@ -6,7 +6,7 @@ workflows:
       - events:
           - push
           - pull_request
-   steps:
+    steps:
       - name: Checkout source code
         checkout: true
       - name: Install dependencies
