@@ -6,9 +6,6 @@ workflows:
        events:
           - push
           - pull_request
-
-    
-
     # 构建完之后的步骤
     scripts:
       - name: Install Firebase CLI
