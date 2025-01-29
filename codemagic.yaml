@@ -2,35 +2,33 @@ workflows:
   flutter_build_and_distribute:
     name: Flutter Build and Distribute
     max_build_duration: 60
-    triggers:
-      - events:
-          - push
-          - pull_request
+
+    # 步骤：定义构建过程中的每一个操作
     steps:
       - name: Checkout source code
         checkout: true
 
-      # Step 1: Install Flutter dependencies
+      # 安装 Flutter 依赖
       - name: Install Flutter dependencies
         script: |
           flutter pub get
 
-      # Step 2: Build APK for Android
+      # 构建 APK (Android)
       - name: Build APK (Android)
         script: |
           flutter build apk --release
 
-      # Step 3: Build IPA for iOS
+      # 构建 IPA (iOS)
       - name: Build IPA (iOS)
         script: |
           flutter build ios --release
 
-      # Step 4: Install Firebase CLI
+      # 安装 Firebase CLI
       - name: Install Firebase CLI
         script: |
           npm install -g firebase-tools
 
-      # Step 5: Upload APK to Firebase App Distribution
+      # 上传 APK 到 Firebase
       - name: Upload APK to Firebase
         script: |
           firebase appdistribution:distribute build/app/outputs/flutter-apk/app-release.apk \
@@ -38,7 +36,13 @@ workflows:
             --groups testers \
             --token $FIREBASE_CLI_TOKEN
 
+    # 指定构建产物
     artifacts:
-      # Store the APK and IPA files as build artifacts
       - build/app/outputs/flutter-apk/app-release.apk
       - build/ios/ipa/Runner.ipa
+
+# 触发器：定义构建何时触发
+triggers:
+  - events:
+      - push
+      - pull_request
